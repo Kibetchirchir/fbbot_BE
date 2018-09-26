@@ -275,7 +275,7 @@ class messageController extends Controller
             ->orderBy('created_at', 'desc')->first();
 
         $phone=$user->phoneNo;
-        $message= "2018-09-24: MIO4U8T156 Customer Merchant Payment 30 966721 - Dannys VIA M-PAYA2018-09-24: MIO4U8T156 Customer Merchant Payment 30 966721 - Danny's Pub VIA M-PAYA";
+        $message= "Here is your mini statement 2018-09-24: MIO4U8T156 Customer Merchant Payment 30 966721 - Dannys VIA M-PAYA2018-09-24: MIO4U8T156 Customer Merchant Payment 30 966721 - Danny's Pub VIA M-PAYA";
 
         $this->sendsms($phone,$message);
 
