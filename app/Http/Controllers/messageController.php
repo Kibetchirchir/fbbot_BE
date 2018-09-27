@@ -144,7 +144,7 @@ class messageController extends Controller
 
             $account->save();
 
-            $text = "Thank you for choosing NBK your OTP is" . $Otp ."please enter on the messenger to complete the account setup";
+            $text = "Thank you for choosing NBK your OTP is  " . $Otp .".Please enter on the messenger to complete the account setup.  ";
 
             $this->sendsms($phone2,$text);
 
@@ -184,7 +184,7 @@ class messageController extends Controller
 
         $account->save();
 
-        $text = "Thank you for choosing NBK your OTP is" . $Otp ."This is the OTP to link your account";
+        $text = "Thank you for choosing NBK your OTP is" . $Otp ."&nbsp;.This is the OTP to link your account";
 
         $this->sendsms($phone2,$text);
 
