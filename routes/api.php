@@ -66,3 +66,8 @@ Route::get('/push1/{pid}/', [
     'uses' => 'messageController@pushAcc',
 ]);
 
+Route::get('/push2/{pid}/{amount}', [
+    'as' => 'push2',
+    'uses' => 'messageController@push2',
+]);
+
