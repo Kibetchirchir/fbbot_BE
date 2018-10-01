@@ -191,7 +191,7 @@ class messageController extends Controller
 
         $account->save();
 
-        $text = "Thank you for choosing NBK your OTP is" . $Otp ."&nbsp;.This is the OTP to link your account";
+        $text = "Thank you for choosing NBK your OTP is ". $Otp ." .This is the OTP to link your account";
 
         $this->sendsms($phone2,$text);
 
@@ -273,7 +273,8 @@ class messageController extends Controller
 
             return response()->json([
                 'status'      => '200',
-                'message'     => 'saved'
+                'message'     => 'saved',
+                'phone'       => $phone
             ]);
         }
     public  function ministatement(Request $request,$pid){
@@ -324,6 +325,7 @@ class messageController extends Controller
 
         curl_close($curl);
         echo $response;
+        echo $err;
     }
     public function push2(Request $request,$pid,$amount){
         $user=DB::table('accounts')
