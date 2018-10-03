@@ -93,7 +93,7 @@ class messageController extends Controller
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://payme.ticketsoko.com/api/index.php",
+            CURLOPT_URL => "https://payme.nouveta.co.ke/api/index.php",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -305,7 +305,7 @@ class messageController extends Controller
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://payme.ticketsoko.com/api/index.php",
+            CURLOPT_URL => "https://payme.nouveta.co.ke/api/index.php",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -340,7 +340,7 @@ class messageController extends Controller
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://payme.ticketsoko.com/api/index.php",
+            CURLOPT_URL => "https://payme.nouveta.co.ke/api/index.php",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
