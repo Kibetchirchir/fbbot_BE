@@ -289,7 +289,8 @@ class messageController extends Controller
 
         return response()->json([
             'status'      => '200',
-            'message'     => 'saved'
+            'message'     => 'saved',
+            'data'        =>  $phone
         ]);
     }
     public function pushAcc(Request $request,$pid){
