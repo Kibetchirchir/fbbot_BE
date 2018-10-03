@@ -14,22 +14,37 @@ class callBack extends Controller
         $AccountReference =  $request->input('AccountReference');
         $Amount = $request->input('Amount');
 
+        $acc = accounts::where('phoneNo',$PhoneNumber)->first();
+
+        $pid = $acc->pid;
+
         if($MpesaReceiptNumber == "FAILED"){
             return response()->json([
                 'status'      => 'success',
-                'message'     => 'saved',
-                'data'        => 'failed'
+                'message'     => 'no failed',
+                'data'        => $pid
             ]);
         }else{
-            //accounts::find($PhoneNumber)->increment('balance', $Amount);
+            $balance = $acc->balance;
+            $amount = $Amount + $balance;
 
-            return response()->json([
-                'status'      => 'success',
-                'message'     => 'saved',
-                'data'        => $MpesaReceiptNumber,
-                'data2'        => $Amount
-            ]);
-        }
+            $acc->balance = $amount;
+            if($acc->save()){
+                return response()->json([
+                    'status'      => 'increased',
+                    'message'     => 'saved',
+                    'data'        => $pid
+                ]);
+            }else
+            {
+                return response()->json([
+                    'status'      => 'failed increase',
+                    'message'     => 'saved',
+                    'data'        => $pid
+                ]);
+            }
+
+              }
 
 
 
