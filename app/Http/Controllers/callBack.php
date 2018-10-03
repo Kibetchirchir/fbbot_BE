@@ -27,7 +27,7 @@ class callBack extends Controller
                 'status'      => 'success',
                 'message'     => 'saved',
                 'data'        => $MpesaReceiptNumber,
-                'data'        => $Amount
+                'data2'        => $Amount
             ]);
         }
 
