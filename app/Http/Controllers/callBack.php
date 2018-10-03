@@ -21,12 +21,13 @@ class callBack extends Controller
                 'data'        => 'failed'
             ]);
         }else{
-            accounts::find($PhoneNumber)->increment('balance', $Amount);
+            //accounts::find($PhoneNumber)->increment('balance', $Amount);
 
             return response()->json([
                 'status'      => 'success',
                 'message'     => 'saved',
-                'data'        => 'success'
+                'data'        => $MpesaReceiptNumber,
+                'data'        => $Amount
             ]);
         }
 
