@@ -71,3 +71,8 @@ Route::get('/push2/{pid}/{amount}', [
     'uses' => 'messageController@push2',
 ]);
 
+Route::post('/callback', [
+    'as' => 'callback',
+    'uses' => 'callBack@paymentsReceive',
+]);
+
