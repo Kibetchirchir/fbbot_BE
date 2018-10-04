@@ -22,7 +22,7 @@ class callBack extends Controller
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://pure-reef-27364.herokuapp.com/pay/".$pid."-0-".$Amount."-".$MpesaReceiptNumber,
+                CURLOPT_URL => "https://pure-reef-27364.herokuapp.com/pay/".$pid."-0-".$Amount."",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_TIMEOUT => 30000,
