@@ -138,8 +138,8 @@ class messageController extends Controller
                 ->where('Pid', $Pid)
                 ->where('message', 'email')
                 ->orderBy('created_at', 'desc')->first();*/
-            //$phone1=substr($phone, 2);
-            $phone2=$phone;
+            $phone1=substr($phone, 1);
+            $phone2=$phone1;
 
             $account=new accounts;
 
