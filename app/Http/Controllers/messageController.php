@@ -125,10 +125,10 @@ class messageController extends Controller
          * registration
          */
         public function register(Request $request,$Pid,$phone){
-            $phone=DB::table('past_messages')
-                ->where('Pid', $Pid)
-                ->where('message', 'phone')
-                ->orderBy('created_at', 'desc')->first();
+//            $phone=DB::table('past_messages')
+//                ->where('Pid', $Pid)
+//                ->where('message', 'phone')
+//                ->orderBy('created_at', 'desc')->first();
             $ID=DB::table('past_messages')
                 ->where('Pid', $Pid)
                 ->where('message', 'reg2')
