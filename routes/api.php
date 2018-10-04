@@ -75,8 +75,15 @@ Route::post('/callback', [
     'as' => 'callback',
     'uses' => 'callBack@paymentsReceive',
 ]);
-
+/**
+ *
+ */
 Route::get('/otpresend/{pid}', [
-    'as' => 'push2',
+    'as' => 'otpresend',
     'uses' => 'messageController@resendOTP',
+]);
+
+Route::get('/confirm/{pid}', [
+    'as' => 'confirm',
+    'uses' => 'account@checkregistration',
 ]);

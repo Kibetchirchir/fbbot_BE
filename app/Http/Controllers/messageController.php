@@ -267,14 +267,16 @@ class messageController extends Controller
                 ->orderBy('created_at', 'desc')->first();
 
             $phone=$user->phoneNo;
-            $message= "Your account balance is 1000000.00";
+            $balance=$user->balance;
+            $message= "Your account balance is ".$balance;
 
             $this->sendsms($phone,$message);
 
             return response()->json([
                 'status'      => '200',
                 'message'     => 'saved',
-                'phone'       => $phone
+                'phone'       => $phone,
+                'balance'     => $balance
             ]);
         }
     public  function ministatement(Request $request,$pid){
