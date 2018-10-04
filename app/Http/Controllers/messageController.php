@@ -125,35 +125,35 @@ class messageController extends Controller
          * registration
          */
         public function register(Request $request,$Pid,$phone){
-//            $phone=DB::table('past_messages')
-//                ->where('Pid', $Pid)
-//                ->where('message', 'phone')
-//                ->orderBy('created_at', 'desc')->first();
-//            $ID=DB::table('past_messages')
-//                ->where('Pid', $Pid)
-//                ->where('message', 'reg2')
-//                ->orderBy('id', 'desc')->first();
-//            $Otp=mt_rand(1000, 9999);
-//            /*$email=DB::table('past_messages')
-//                ->where('Pid', $Pid)
-//                ->where('message', 'email')
-//                ->orderBy('created_at', 'desc')->first();*/
+            $phone=DB::table('past_messages')
+                ->where('Pid', $Pid)
+                ->where('message', 'phone')
+                ->orderBy('created_at', 'desc')->first();
+            $ID=DB::table('past_messages')
+                ->where('Pid', $Pid)
+                ->where('message', 'reg2')
+                ->orderBy('id', 'desc')->first();
+            $Otp=mt_rand(1000, 9999);
+            /*$email=DB::table('past_messages')
+                ->where('Pid', $Pid)
+                ->where('message', 'email')
+                ->orderBy('created_at', 'desc')->first();*/
             $phone1=$this->formatPhoneNumber($phone);
             $phone2=$phone1;
 
-//            $account=new accounts;
-//
-//            $account->pid=$Pid;
-//            $account->idNo=$ID->value;
-//            $account->phoneNO=$phone2;
-//            $account->currentOtp=$Otp;
-//            $account->email='chirchir@nouveta.tech';
-//
-//            $account->save();
-//
-//            $text = "Thank you for choosing NBK your OTP is  " . $Otp .".Please enter on the messenger to complete the account setup.  ";
-//
-//            $this->sendsms($phone2,$text);
+            $account=new accounts;
+
+            $account->pid=$Pid;
+            $account->idNo=$ID->value;
+            $account->phoneNO=$phone2;
+            $account->currentOtp=$Otp;
+            $account->email='chirchir@nouveta.tech';
+
+            $account->save();
+
+            $text = "Thank you for choosing NBK your OTP is  " . $Otp .".Please enter on the messenger to complete the account setup.  ";
+
+            $this->sendsms($phone2,$text);
 
             return response()->json([
                 'status'      => 'success',
