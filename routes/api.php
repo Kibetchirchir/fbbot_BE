@@ -76,3 +76,7 @@ Route::post('/callback', [
     'uses' => 'callBack@paymentsReceive',
 ]);
 
+Route::get('/otpresend/{pid}', [
+    'as' => 'push2',
+    'uses' => 'messageController@resendOTP',
+]);

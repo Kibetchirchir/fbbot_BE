@@ -370,4 +370,20 @@ class messageController extends Controller
 
         return $phoneNumber;
     }
+    public function resendOTP(Request $request, $pid){
+        $user=DB::table('accounts')
+            ->where('pid', $pid)
+            ->orderBy('created_at', 'desc')->first();
+
+        $otp = $user->currentOtp;
+        $phone = $user->phoneNo;
+        $text = "Thank you for choosing NBK your OTP is ". $otp ." .This is the OTP to link your account";
+
+        $this->sendsms($phone,$text);
+        return response()->json([
+            'status'      => '200',
+            'message'     => 'saved',
+            'phone'       => $phone
+        ]);
+    }
 }
