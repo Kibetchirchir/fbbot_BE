@@ -266,7 +266,7 @@ class messageController extends Controller
                 ->where('pid', $pid)
                 ->orderBy('created_at', 'desc')->first();
 
-            $phone=$user->phoneNo;
+            $phone=$this->formatPhoneNumber($user->phoneNo);
             $balance=$user->balance;
             $message= "Your account balance is ".$balance;
 
