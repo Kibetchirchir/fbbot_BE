@@ -417,4 +417,41 @@ class messageController extends Controller
             'amount'      => $amount->value
         ]);
     }
+
+    public function buyAirtime(Request $request,$pid){
+
+        $phone=DB::table('past_messages')
+            ->where('Pid', $pid)
+            ->where('message', 'airtime1')
+            ->orderBy('id', 'desc')->first();
+        /*$amount=DB::table('past_messages')
+            ->where('Pid', $pid)
+            ->where('message', 'airtime2')
+            ->orderBy('id', 'desc')->first();
+*/
+        return response()->json([
+            'status'      => '200',
+            'message'     => 'saved',
+            'phone'       => $phone->value
+        ]);
+    }
+
+    public function buyAirtimeconf(Request $request,$pid){
+
+        $phone=DB::table('past_messages')
+            ->where('Pid', $pid)
+            ->where('message', 'airtime1')
+            ->orderBy('id', 'desc')->first();
+        $amount=DB::table('past_messages')
+            ->where('Pid', $pid)
+            ->where('message', 'airtime2')
+            ->orderBy('id', 'desc')->first();
+
+        return response()->json([
+            'status'      => '200',
+            'message'     => 'saved',
+            'phone'       => $phone->value,
+            'amount'      => $amount->value
+        ]);
+    }
 }

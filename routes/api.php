@@ -97,3 +97,14 @@ Route::get('/sendmoneyconfirm/{pid}', [
     'as' => 'confirm',
     'uses' => 'messageController@sendmoneyconfirm',
 ]);
+
+Route::get('/buyairtime/{pid}', [
+    'as' => 'confirm',
+    'uses' => 'messageController@buyAirtime',
+]);
+
+
+Route::get('/buyairtimeconfirm/{pid}', [
+    'as' => 'confirm',
+    'uses' => 'messageController@buyAirtimeconf',
+]);
