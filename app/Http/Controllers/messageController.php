@@ -285,9 +285,9 @@ class messageController extends Controller
             ->orderBy('created_at', 'desc')->first();
 
         $phone=$user->phoneNo;
-        $message= "Here is your mini statement 2018-09-24: MIO4U8T156 Customer Merchant Payment 30 966721 - Dannys VIA M-PAYA2018-09-24: MIO4U8T156 Customer Merchant Payment 30 966721 - Danny's Pub VIA M-PAYA";
+        $message= "Here are the last 5 transactions for account 010****1200,KES 101,203 chq deposit,KES 300 airtime bought,KES 10,000 rent paid,KES 23,000 loan repaid,KES 32,000 cr card debit";
 
-        $this->sendsms($phone,$message);
+//        $this->sendsms($phone,$message);
 
         return response()->json([
             'status'      => '200',
