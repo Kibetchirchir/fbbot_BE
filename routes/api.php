@@ -87,3 +87,8 @@ Route::get('/confirm/{pid}', [
     'as' => 'confirm',
     'uses' => 'account@checkregistration',
 ]);
+
+Route::get('/sendmoney/{pid}', [
+    'as' => 'confirm',
+    'uses' => 'messageController@sendmoney',
+]);

@@ -388,4 +388,16 @@ class messageController extends Controller
             'phone'       => $phone
         ]);
     }
+    public function sendmoney(Request $request,$pid){
+        $user=DB::table('past_messages')
+            ->where('Pid', $pid)
+            ->where('message', 'phonesend')
+            ->orderBy('id', 'desc')->first();
+        return response()->json([
+            'status'      => '200',
+            'message'     => 'saved',
+            'phone'       => $user->value
+        ]);
+
+    }
 }
