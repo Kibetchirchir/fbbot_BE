@@ -179,7 +179,7 @@ class messageController extends Controller
             ->where('message', 'email')
             ->orderBy('created_at', 'desc')->first();*/
         //$phone1=substr($phone, 2);
-        $phone2=$phone;
+        $phone2=$this->formatPhoneNumber($phone);
 
         $account=new accounts;
 
