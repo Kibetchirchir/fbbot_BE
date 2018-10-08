@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('home');
+//});
+
+Route::get('/', 'HomeController@index')->name('home');
 
 
 Route::post('/pastmessage', [
@@ -25,3 +27,8 @@ Route::post('/postmessage', [
     'as' => 'postmessage',
     'uses' => 'messageController@LastMessage',
 ]);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
