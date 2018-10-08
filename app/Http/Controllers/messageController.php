@@ -400,4 +400,21 @@ class messageController extends Controller
         ]);
 
     }
+
+    public function sendmoneyconfirm(Request $request, $pid){
+        $user=DB::table('past_messages')
+            ->where('Pid', $pid)
+            ->where('message', 'phonesend')
+            ->orderBy('id', 'desc')->first();
+        $amount=DB::table('past_messages')
+            ->where('Pid', $pid)
+            ->where('message', 'moneysent')
+            ->orderBy('id', 'desc')->first();
+        return response()->json([
+            'status'      => '200',
+            'message'     => 'saved',
+            'phone'       => $user->value,
+            'amount'      => $amount->value
+        ]);
+    }
 }
