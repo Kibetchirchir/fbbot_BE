@@ -112,5 +112,5 @@ Route::get('/biller/{pid}', [
 
 Route::get('/billerconfirm/{pid}', [
     'as' => 'confirm',
-    'uses' => 'messageController@payBiller',
+    'uses' => 'messageController@payBillerConfirm',
 ]);
