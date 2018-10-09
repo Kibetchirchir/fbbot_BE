@@ -483,7 +483,7 @@ class messageController extends Controller
             ->orderBy('id', 'desc')->first();
         $paymentmade=DB::table('past_messages')
             ->where('Pid', $pid)
-            ->where('message', 'accountnumber')
+            ->where('message', 'paymentmade')
             ->orderBy('id', 'desc')->first();
 
         return response()->json([
