@@ -454,4 +454,44 @@ class messageController extends Controller
             'amount'      => $amount->value
         ]);
     }
+    public function payBiller(Request $request,$pid){
+        $biller=DB::table('past_messages')
+            ->where('Pid', $pid)
+            ->where('message', 'accountno')
+            ->orderBy('id', 'desc')->first();
+        $accountNumber=DB::table('past_messages')
+            ->where('Pid', $pid)
+            ->where('message', 'accountnumber')
+            ->orderBy('id', 'desc')->first();
+
+        return response()->json([
+            'status'      => '200',
+            'message'     => 'saved',
+            'biller'       => $biller->value,
+            'account'      => $accountNumber->value
+        ]);
+    }
+
+    public function payBillerConfirm(Request $request,$pid){
+        $biller=DB::table('past_messages')
+            ->where('Pid', $pid)
+            ->where('message', 'accountno')
+            ->orderBy('id', 'desc')->first();
+        $accountNumber=DB::table('past_messages')
+            ->where('Pid', $pid)
+            ->where('message', 'accountnumber')
+            ->orderBy('id', 'desc')->first();
+        $paymentmade=DB::table('past_messages')
+            ->where('Pid', $pid)
+            ->where('message', 'accountnumber')
+            ->orderBy('id', 'desc')->first();
+
+        return response()->json([
+            'status'      => '200',
+            'message'     => 'saved',
+            'biller'       => $biller->value,
+            'account'      => $accountNumber->value,
+            'amount'      =>  $paymentmade->value
+        ]);
+    }
 }
