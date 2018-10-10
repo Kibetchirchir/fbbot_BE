@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2 col-lg-2 bg-danger">
+        <div class="col-md-2 col-lg-2">
             @include('inc.sidebar')
         </div>
 

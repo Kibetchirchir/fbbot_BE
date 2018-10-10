@@ -103,7 +103,10 @@ Route::get('/buyairtime/{pid}', [
     'uses' => 'messageController@buyAirtime',
 ]);
 
-
+Route::get('/buyairtimeconfirm/{pid}', [
+    'as' => 'confirm',
+    'uses' => 'messageController@buyAirtimeconf',
+]);
 
 Route::get('/biller/{pid}', [
     'as' => 'confirm',
