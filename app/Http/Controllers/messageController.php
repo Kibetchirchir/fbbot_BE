@@ -444,7 +444,7 @@ class messageController extends Controller
             ->orderBy('id', 'desc')->first();
         $amount=DB::table('past_messages')
             ->where('Pid', $pid)
-            ->where('message', 'airtime2')
+            ->where('message', 'airtimesent')
             ->orderBy('id', 'desc')->first();
 
         return response()->json([
