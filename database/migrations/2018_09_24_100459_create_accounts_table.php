@@ -18,6 +18,8 @@ class CreateAccountsTable extends Migration
             $table->string('pid');
             $table->string('idNo')->nullable();
             $table->string('phoneNo')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('second_name')->nullable();
             $table->string('currentOtp')->nullable();
             $table->string('balance')->default(0);
             $table->string('email')->nullable();

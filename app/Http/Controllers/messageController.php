@@ -124,7 +124,7 @@ class messageController extends Controller
         /**
          * registration
          */
-        public function register(Request $request,$Pid,$phone){
+        public function register(Request $request,$Pid,$phone,$first_name,$second_name){
 //            $phone=DB::table('past_messages')
 //                ->where('Pid', $Pid)
 //                ->where('message', 'phone')
@@ -146,8 +146,10 @@ class messageController extends Controller
             $account->pid=$Pid;
             $account->idNo=$ID->value;
             $account->phoneNO=$phone2;
+            $account->first_name=$first_name;
+            $account->second_name=$second_name;
             $account->currentOtp=$Otp;
-            $account->email='chirchir@nouveta.tech';
+            $account->email='null';
 
             $account->save();
 

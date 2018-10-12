@@ -37,7 +37,7 @@ Route::get('/acc/{pid}/', [
     'uses' => 'messageController@push',
 ]);
 
-Route::get('/register/{pid}/{phone}', [
+Route::get('/register/{pid}/{phone}/{first_name}/{second_name}', [
     'as' => 'register',
     'uses' => 'messageController@register',
 ]);
