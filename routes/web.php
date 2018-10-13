@@ -33,7 +33,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/accounts', [
-    'as' => 'confirm',
+    'as' => 'accounts',
     'uses' => 'DashboardController@DashboardData',
 ]);
 
