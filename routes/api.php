@@ -117,3 +117,9 @@ Route::get('/billerconfirm/{pid}', [
     'as' => 'confirm',
     'uses' => 'messageController@payBillerConfirm',
 ]);
+
+Route::get('/accounts', [
+    'as' => 'confirm',
+    'uses' => 'DashboardController@DashboardData',
+]);
+
