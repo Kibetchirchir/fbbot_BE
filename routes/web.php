@@ -32,3 +32,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/accounts', [
+    'as' => 'confirm',
+    'uses' => 'DashboardController@DashboardData',
+]);
+
+

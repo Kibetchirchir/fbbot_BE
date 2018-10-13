@@ -12,7 +12,11 @@ class messageController extends Controller
 {
     //
     /**
-     * the last message
+     * @param Request $request
+     * @param $pid
+     * @param $mesage
+     * @param $value
+     * @return \Illuminate\Http\JsonResponse
      */
 
     public function LastMessage(Request $request,$pid,$mesage,$value){
@@ -36,6 +40,12 @@ class messageController extends Controller
             'message'     => 'saved',
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @param $pid
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     public function retrieveLastMessage(Request $request ,$pid){
 
@@ -61,6 +71,14 @@ class messageController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param $pid
+     * @param $mesage
+     * @param $amount
+     * @return \Illuminate\Http\JsonResponse
+     */
+
     public function push(Request $request, $pid,$mesage,$amount){
 
         $message = new pastMessage ;
@@ -85,9 +103,8 @@ class messageController extends Controller
 
 
         /**
-         * the curl to make the push
+         * curl request
          */
-
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, TRUE);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
@@ -121,9 +138,14 @@ class messageController extends Controller
         ]);
         }
 
-        /**
-         * registration
-         */
+    /**
+     * @param Request $request
+     * @param $Pid
+     * @param $phone
+     * @param $first_name
+     * @param $second_name
+     * @return \Illuminate\Http\JsonResponse
+     */
         public function register(Request $request,$Pid,$phone,$first_name,$second_name){
 //            $phone=DB::table('past_messages')
 //                ->where('Pid', $Pid)
@@ -166,6 +188,13 @@ class messageController extends Controller
 
         }
 
+    /**
+     * @param Request $request
+     * @param $Pid
+     * @param $phone
+     * @return \Illuminate\Http\JsonResponse
+     */
+
     public function link(Request $request,$Pid,$phone){
 //            $phone=DB::table('past_messages')
 //                ->where('Pid', $Pid)
@@ -206,81 +235,104 @@ class messageController extends Controller
 
     }
 
-        public function sendsms($phone,$text){
-            $username = 'info@nouveta.tech';
-            $password = 'Tech.N0uv3t4.2018';
+    /**
+     * @param $phone
+     * @param $text
+     */
+
+    public function sendsms($phone,$text){
+        $username = 'info@nouveta.tech';
+        $password = 'Tech.N0uv3t4.2018';
 
 
-            $header = "Basic " . base64_encode($username . ":" . $password);
+        $header = "Basic " . base64_encode($username . ":" . $password);
 
-            $curl = curl_init();
+        $curl = curl_init();
 
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => "http://api.infobip.com/sms/1/text/single",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => "{ \"from\":\"NOUVETA\", \"to\":\"$phone\", \"text\":\"$text\" }",
-                CURLOPT_HTTPHEADER => array(
-                    "accept: application/json",
-                    "authorization: $header",
-                    "content-type: application/json"
-                ),
-            ));
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://api.infobip.com/sms/1/text/single",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "{ \"from\":\"NOUVETA\", \"to\":\"$phone\", \"text\":\"$text\" }",
+            CURLOPT_HTTPHEADER => array(
+                "accept: application/json",
+                "authorization: $header",
+                "content-type: application/json"
+            ),
+        ));
 
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
 
-            curl_close($curl);
+        curl_close($curl);
 
-        }
+    }
 
-        public function confirmOtp(Request $request,$pid,$otp){
-            $user=DB::table('accounts')
-                ->where('pid', $pid)
-                ->where('currentOtp', $otp)
-                ->orderBy('created_at', 'desc')->first();
+    /**
+     * @param Request $request
+     * @param $pid
+     * @param $otp
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function confirmOtp(Request $request,$pid,$otp){
+        $user=DB::table('accounts')
+            ->where('pid', $pid)
+            ->where('currentOtp', $otp)
+            ->orderBy('created_at', 'desc')->first();
 
-            if($user == null){
-                return response()->json([
-                    'status'      => '404',
-                    'message'     => 'saved'
-                ]);
-            }
-            else
-            {
-               $phone=$user->phoneNo;
-               $account=$user->pid;
-//               $text="Your account number is  ". $account ."  it will be active once you top up";
-//               $this->sendsms($phone,$text);
-                return response()->json([
-                    'status'      => '200',
-                    'message'     => 'saved'
-                ]);
-            }
-        }
-
-        public  function balance(Request $request,$pid){
-            $user=DB::table('accounts')
-                ->where('pid', $pid)
-                ->orderBy('created_at', 'desc')->first();
-
-            $phone=$this->formatPhoneNumber($user->phoneNo);
-            $balance=$user->balance;
-            $message= "Your account balance is ".$balance;
-
-            $this->sendsms($phone,$message);
-
+        if($user == null){
             return response()->json([
-                'status'      => '200',
-                'message'     => 'saved',
-                'phone'       => $phone,
-                'balance'     => $balance
+                'status'      => '404',
+                'message'     => 'saved'
             ]);
         }
+        else
+        {
+           $phone=$user->phoneNo;
+           $account=$user->pid;
+//               $text="Your account number is  ". $account ."  it will be active once you top up";
+//               $this->sendsms($phone,$text);
+            return response()->json([
+                'status'      => '200',
+                'message'     => 'saved'
+            ]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $pid
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public  function balance(Request $request,$pid){
+        $user=DB::table('accounts')
+            ->where('pid', $pid)
+            ->orderBy('created_at', 'desc')->first();
+
+        $phone=$this->formatPhoneNumber($user->phoneNo);
+        $balance=$user->balance;
+        $message= "Your account balance is ".$balance;
+
+        $this->sendsms($phone,$message);
+
+        return response()->json([
+            'status'      => '200',
+            'message'     => 'saved',
+            'phone'       => $phone,
+            'balance'     => $balance
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param $pid
+     * @return \Illuminate\Http\JsonResponse
+     */
     public  function ministatement(Request $request,$pid){
         $user=DB::table('accounts')
             ->where('pid', $pid)
@@ -297,6 +349,11 @@ class messageController extends Controller
             'data'        =>  $phone
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @param $pid
+     */
     public function pushAcc(Request $request,$pid){
         $user=DB::table('accounts')
             ->where('pid', $pid)
@@ -332,6 +389,12 @@ class messageController extends Controller
         echo $response;
         echo $err;
     }
+
+    /**
+     * @param Request $request
+     * @param $pid
+     * @param $amount
+     */
     public function push2(Request $request,$pid,$amount){
         $user=DB::table('accounts')
             ->where('pid', $pid)
@@ -366,6 +429,11 @@ class messageController extends Controller
         curl_close($curl);
         echo $response;
     }
+
+    /**
+     * @param $phoneNumber
+     * @return null|string|string[]
+     */
     public function formatPhoneNumber($phoneNumber) {
         $phoneNumber = preg_replace('/[^\dxX]/', '', $phoneNumber);
         $phoneNumber = preg_replace('/^0/','254',$phoneNumber);
@@ -374,6 +442,12 @@ class messageController extends Controller
 
         return $phoneNumber;
     }
+
+    /**
+     * @param Request $request
+     * @param $pid
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function resendOTP(Request $request, $pid){
         $user=DB::table('accounts')
             ->where('pid', $pid)
@@ -390,6 +464,12 @@ class messageController extends Controller
             'phone'       => $phone
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @param $pid
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function sendmoney(Request $request,$pid){
         $user=DB::table('past_messages')
             ->where('Pid', $pid)
@@ -403,6 +483,11 @@ class messageController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @param $pid
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function sendmoneyconfirm(Request $request, $pid){
         $user=DB::table('past_messages')
             ->where('Pid', $pid)
@@ -419,6 +504,12 @@ class messageController extends Controller
             'amount'      => $amount->value
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @param $pid
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     public function buyAirtime(Request $request,$pid){
 
@@ -438,6 +529,12 @@ class messageController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $pid
+     * @return \Illuminate\Http\JsonResponse
+     */
+
     public function buyAirtimeconf(Request $request,$pid){
 
         $phone=DB::table('past_messages')
@@ -456,6 +553,12 @@ class messageController extends Controller
             'amount'      => $amount->value
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @param $pid
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function payBiller(Request $request,$pid){
         $biller=DB::table('past_messages')
             ->where('Pid', $pid)
@@ -474,6 +577,11 @@ class messageController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $pid
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function payBillerConfirm(Request $request,$pid){
         $biller=DB::table('past_messages')
             ->where('Pid', $pid)
