@@ -31,7 +31,7 @@
 
                         <!-- Branding Image -->
                         <a class="navbar-brand col-md-offset-0" href="{{ url('/home') }}">
-                            <span class="glyphicon-headphones">HOME</span>
+                            <span class="glyphicon-headphones" id="top">HOME</span>
                         </a>
                     </div>
 
@@ -48,20 +48,20 @@
                                 <li><a href="{{ route('login') }}">Login</a></li>
                                 <li><a href="{{ route('register') }}">Register</a></li>
                             @else
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                                <li class="dropdown" id="top">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="top" aria-haspopup="true" v-pre>
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
 
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="{{ route('logout') }}"
+                                            <a id="top" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                                 Logout
                                             </a>
 
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            <form id="logout-form top" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                 {{ csrf_field() }}
                                             </form>
                                         </li>

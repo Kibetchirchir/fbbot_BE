@@ -8356,7 +8356,7 @@ button.close {
   bottom: 0;
   height: 900px;
   background: black;
-  color: #bce8f1;
+  color: white;
 }
 
 #main {
@@ -8369,6 +8369,6 @@ button.close {
 
 #top {
   background: black;
-  color: #bce8f1;
+  color: white;
 }
 
